@@ -14,10 +14,6 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
 if (!global.fetch) {
   require('isomorphic-fetch');
 }
