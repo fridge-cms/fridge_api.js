@@ -33,7 +33,11 @@ var checkStatus = function checkStatus(response) {
 };
 
 var parseJSON = function parseJSON(response) {
-  return response.json();
+  if (response.headers.get('Content-Type') == 'application/json') {
+    return response.json();
+  }
+
+  return response.text();
 };
 
 var FridgeApi = (function () {
