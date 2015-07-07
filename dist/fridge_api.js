@@ -14,6 +14,10 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+var _qs = require('qs');
+
+var _qs2 = _interopRequireDefault(_qs);
+
 if (!global.fetch) {
   require('isomorphic-fetch');
 }
@@ -32,7 +36,7 @@ var checkStatus = function checkStatus(response) {
   }
 };
 
-var parseJSON = function parseJSON(response) {
+var parseResponse = function parseResponse(response) {
   if (response.headers.get('Content-Type') == 'application/json') {
     return response.json();
   }
@@ -104,21 +108,51 @@ var FridgeApi = (function () {
     });
   };
 
-  FridgeApi.prototype._request = function _request(method, endpoint, data, options, done) {
+  FridgeApi.prototype.url = function url(path) {
+    var query = arguments[1] === undefined ? {} : arguments[1];
+
+    path = path.replace(/^\//g, '');
+    var q = _qs2['default'].stringify(query);
+    return this.options.api_endpoint + '/' + path + (q.length ? '?' + q : '');
+  };
+
+  FridgeApi.prototype._request = function _request(method, path, data, options, done) {
     var _this2 = this,
         _arguments = arguments;
 
-    options = _objectAssign2['default'](options, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'token ' + this.accessToken
-      },
-      method: method,
-      body: method == 'post' || method == 'put' ? JSON.stringify(data) : null
-    });
-    var url = this.options.api_endpoint + '/' + endpoint;
-    var req = fetch(url, options).then(checkStatus).then(parseJSON).then(this._parse.bind(this))['catch'](function (err) {
-      if (err.response && err.response.status == 401) {
+    var auth = true;
+    var requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+      body: method == 'post' || method == 'put' ? JSON.stringify(data) : null,
+      method: method
+    };
+
+    if (options.auth) {
+      auth = options.auth;
+      delete options.auth;
+    }
+
+    if (options.body) {
+      requestOptions.body = options.body;
+      delete options.body;
+    }
+
+    if (options.headers) {
+      requestOptions.headers = _objectAssign2['default'](requestOptions.headers, options.headers);
+      delete options.headers;
+    }
+
+    if (options.credentials) {
+      requestOptions.credentials = options.credentials;
+      delete options.credentials;
+    }
+
+    if (auth) {
+      requestOptions.headers['Authorization'] = 'token ' + this.accessToken;
+    }
+
+    var req = fetch(this.url(path, options), requestOptions).then(checkStatus).then(parseResponse).then(this._parse.bind(this))['catch'](function (err) {
+      if (err.response && err.response.status == 401 && auth) {
         return _this2.refreshToken(_arguments);
       }
       throw err;
