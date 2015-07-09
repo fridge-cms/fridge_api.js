@@ -120,7 +120,7 @@ var FridgeApi = (function () {
     var _this2 = this,
         _arguments = arguments;
 
-    var auth = this.accessToken && this.accessToken.length > 0;
+    var auth = true;
     var requestOptions = {
       headers: { 'Content-Type': 'application/json' },
       body: method == 'post' || method == 'put' ? JSON.stringify(data) : null,
@@ -147,7 +147,7 @@ var FridgeApi = (function () {
       delete options.credentials;
     }
 
-    if (auth) {
+    if (auth && this.accessToken) {
       requestOptions.headers['Authorization'] = 'token ' + this.accessToken;
     }
 
