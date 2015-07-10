@@ -97,11 +97,12 @@ var FridgeApi = (function () {
     return obj.id || obj.uuid;
   };
 
-  FridgeApi.prototype.refreshToken = function refreshToken(requestArgs) {
+  FridgeApi.prototype.getToken = function getToken(requestArgs) {
     var _this = this;
 
     return this.post('oauth/token', this._applicationAuthentication()).then(function (data) {
       _this.accessToken = data.access_token;
+      if (data.refresh_token) _this.refreshToken = data.refresh_token;
       return _this._request.apply(_this, requestArgs);
     })['catch'](function (err) {
       throw err;
@@ -153,7 +154,7 @@ var FridgeApi = (function () {
 
     var req = fetch(this.url(path, options), requestOptions).then(checkStatus).then(parseResponse).then(this._parse.bind(this))['catch'](function (err) {
       if (err.response && err.response.status == 401 && auth) {
-        return _this2.refreshToken(_arguments);
+        return _this2.getToken(_arguments);
       }
       throw err;
     });
@@ -181,11 +182,20 @@ var FridgeApi = (function () {
   };
 
   FridgeApi.prototype._applicationAuthentication = function _applicationAuthentication() {
-    return {
-      grant_type: 'client_credentials',
-      client_id: this.options.client_id,
-      client_secret: this.options.client_secret
-    };
+    if (this.refreshToken) {
+      return {
+        grant_type: 'refresh_token',
+        refresh_token: this.refreshToken,
+        client_id: this.options.client_id,
+        client_secret: this.options.client_secret
+      };
+    } else {
+      return {
+        grant_type: 'client_credentials',
+        client_id: this.options.client_id,
+        client_secret: this.options.client_secret
+      };
+    }
   };
 
   return FridgeApi;
