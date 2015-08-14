@@ -61,10 +61,6 @@ var Model = (function () {
           value.forEach(function (part) {
             hash[_this2._partName(part)] = _this2._partValue(part);
           });
-        } else if (this._isPartDefinition(value)) {
-          value.forEach(function (partDefinition) {
-            hash[_this2._partName(partDefinition)] = partDefinition;
-          });
         } else {
           hash[key] = value.map(function (v) {
             return v.id ? new Model(v) : v;
