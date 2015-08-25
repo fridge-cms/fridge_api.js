@@ -35,16 +35,18 @@ var Model = (function () {
               _this.raw[key][i].value = _this.attrs[partName];
             }
           });
+          return "continue";
         }
-      } else {
-        if (value !== _this.attrs[key]) {
-          _this.raw[key] = _this.attrs[key];
-        }
+      }
+      if (value !== _this.attrs[key]) {
+        _this.raw[key] = _this.attrs[key];
       }
     };
 
     for (var key in this.raw) {
-      _loop(key);
+      var _ret = _loop(key);
+
+      if (_ret === "continue") continue;
     }
 
     return this.raw;

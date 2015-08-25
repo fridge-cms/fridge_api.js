@@ -23,7 +23,7 @@ if (!global.fetch) {
 }
 
 var defaults = {
-  api_endpoint: 'https://api.fridgecms.com/v1'
+  api_endpoint: "https://api.fridgecms.com/v1"
 };
 
 var checkStatus = function checkStatus(response) {
@@ -56,33 +56,33 @@ var FridgeApi = (function () {
   };
 
   FridgeApi.prototype.get = function get(url) {
-    var options = arguments[1] === undefined ? {} : arguments[1];
-    var done = arguments[2] === undefined ? null : arguments[2];
+    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var done = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-    return this._request('get', url, null, options, done);
+    return this._request("get", url, null, options, done);
   };
 
   FridgeApi.prototype.post = function post(url) {
-    var data = arguments[1] === undefined ? {} : arguments[1];
-    var options = arguments[2] === undefined ? {} : arguments[2];
-    var done = arguments[3] === undefined ? null : arguments[3];
+    var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    var done = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-    return this._request('post', url, data, options, done);
+    return this._request("post", url, data, options, done);
   };
 
   FridgeApi.prototype.put = function put(url) {
-    var data = arguments[1] === undefined ? {} : arguments[1];
-    var options = arguments[2] === undefined ? {} : arguments[2];
-    var done = arguments[3] === undefined ? null : arguments[3];
+    var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    var done = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-    return this._request('put', url, data, options, done);
+    return this._request("put", url, data, options, done);
   };
 
   FridgeApi.prototype['delete'] = function _delete(url) {
-    var options = arguments[1] === undefined ? {} : arguments[1];
-    var done = arguments[2] === undefined ? null : arguments[2];
+    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var done = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-    return this._request('delete', url, null, options, done);
+    return this._request("delete", url, null, options, done);
   };
 
   FridgeApi.prototype.toModel = function toModel(data) {
@@ -100,7 +100,7 @@ var FridgeApi = (function () {
   FridgeApi.prototype.getToken = function getToken(requestArgs) {
     var _this = this;
 
-    return this.post('oauth/token', this._applicationAuthentication()).then(function (data) {
+    return this.post("oauth/token", this._applicationAuthentication()).then(function (data) {
       _this.accessToken = data.access_token;
       if (data.refresh_token) _this.refreshToken = data.refresh_token;
       return _this._request.apply(_this, requestArgs);
@@ -110,7 +110,7 @@ var FridgeApi = (function () {
   };
 
   FridgeApi.prototype.url = function url(path) {
-    var query = arguments[1] === undefined ? {} : arguments[1];
+    var query = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
     path = path.replace(/^\//g, '');
     var q = _qs2['default'].stringify(query);
@@ -128,7 +128,7 @@ var FridgeApi = (function () {
       method: method
     };
 
-    if ('auth' in options) {
+    if ("auth" in options) {
       auth = options.auth;
       delete options.auth;
     }
@@ -184,14 +184,14 @@ var FridgeApi = (function () {
   FridgeApi.prototype._applicationAuthentication = function _applicationAuthentication() {
     if (this.refreshToken) {
       return {
-        grant_type: 'refresh_token',
+        grant_type: "refresh_token",
         refresh_token: this.refreshToken,
         client_id: this.options.client_id,
         client_secret: this.options.client_secret
       };
     } else {
       return {
-        grant_type: 'client_credentials',
+        grant_type: "client_credentials",
         client_id: this.options.client_id,
         client_secret: this.options.client_secret
       };
