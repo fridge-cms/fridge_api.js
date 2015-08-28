@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 exports.__esModule = true;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Model = (function () {
   function Model(data) {
@@ -18,7 +18,7 @@ var Model = (function () {
       site_id: type.site_id,
       document_definition_id: type.id,
       content: type.parts.map(function (partDefinition) {
-        return { part_definition_id: partDefinition.id, part: partDefinition.raw };
+        return { part_definition_id: partDefinition.id, part: partDefinition };
       })
     });
   };
@@ -36,7 +36,7 @@ var Model = (function () {
               _this.raw[key][i].value = _this.attrs[partName];
             }
           });
-          return 'continue';
+          return "continue";
         }
       }
       if (value !== _this.attrs[key]) {
@@ -47,7 +47,7 @@ var Model = (function () {
     for (var key in this.raw) {
       var _ret = _loop(key);
 
-      if (_ret === 'continue') continue;
+      if (_ret === "continue") continue;
     }
 
     return this.raw;
@@ -110,11 +110,11 @@ var Model = (function () {
   };
 
   Model.prototype._partValue = function _partValue(part) {
-    return 'value' in part ? part.value : undefined;
+    return part.value;
   };
 
   return Model;
 })();
 
-exports['default'] = Model;
-module.exports = exports['default'];
+exports["default"] = Model;
+module.exports = exports["default"];
