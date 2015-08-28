@@ -14,6 +14,7 @@ var Model = (function () {
 
   Model.newFromType = function newFromType(type) {
     return new Model({
+      active: true,
       site_id: type.site_id,
       document_definition_id: type.id,
       content: type.parts.map(function (partDefinition) {
@@ -76,7 +77,7 @@ var Model = (function () {
     var _loop2 = function (key) {
       Object.defineProperty(_this2, key, {
         get: function get() {
-          return this.attrs[key] ? this.attrs[key] : undefined;
+          return this.attrs[key] || undefined;
         },
         set: function set(value) {
           this.attrs[key] = value;
