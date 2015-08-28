@@ -77,7 +77,7 @@ var Model = (function () {
     var _loop2 = function (key) {
       Object.defineProperty(_this2, key, {
         get: function get() {
-          return this.attrs[key] || undefined;
+          return key in this.attrs ? this.attrs[key] : undefined;
         },
         set: function set(value) {
           this.attrs[key] = value;
