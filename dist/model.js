@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 exports.__esModule = true;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var Model = (function () {
   function Model(data) {
@@ -36,7 +36,9 @@ var Model = (function () {
               _this.raw[key][i].value = _this.attrs[partName];
             }
           });
-          return "continue";
+          return 'continue';
+        } else if (value[0] instanceof Model) {
+          console.log('i can haz model');
         }
       }
       if (value !== _this.attrs[key]) {
@@ -47,7 +49,7 @@ var Model = (function () {
     for (var key in this.raw) {
       var _ret = _loop(key);
 
-      if (_ret === "continue") continue;
+      if (_ret === 'continue') continue;
     }
 
     return this.raw;
@@ -64,14 +66,19 @@ var Model = (function () {
           value.forEach(function (part) {
             hash[_this2._partName(part)] = _this2._partValue(part);
           });
+        } else if (this._isPartDefinition(value)) {
+          value.forEach(function (partDefinition) {
+            hash[_this2._partName(partDefinition)] = partDefinition;
+          });
         } else {
           hash[key] = value.map(function (v) {
             return v.id ? new Model(v) : v;
           });
+          continue;
         }
-      } else {
-        hash[key] = value;
       }
+
+      hash[key] = value;
     }
 
     var _loop2 = function (key) {
@@ -111,5 +118,5 @@ var Model = (function () {
   return Model;
 })();
 
-exports["default"] = Model;
-module.exports = exports["default"];
+exports['default'] = Model;
+module.exports = exports['default'];
