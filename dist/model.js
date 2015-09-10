@@ -9,6 +9,7 @@ var Model = (function () {
     _classCallCheck(this, Model);
 
     this.raw = data;
+    this._parts = {};
     this.attrs = this.parse();
   }
 
@@ -32,8 +33,8 @@ var Model = (function () {
         if (_this._isPart(value)) {
           value.forEach(function (part, i) {
             var partName = _this._partName(part);
-            if (_this._partValue(partName) !== _this.attrs[partName]) {
-              _this.raw[key][i].value = _this.attrs[partName];
+            if (_this._partValue(partName) !== _this._parts[partName]) {
+              _this.raw[key][i].value = _this._parts[partName];
             }
           });
           return "continue";
@@ -62,11 +63,11 @@ var Model = (function () {
       if (Array.isArray(value)) {
         if (this._isPart(value)) {
           value.forEach(function (part) {
-            hash[_this2._partName(part)] = _this2._partValue(part);
+            _this2._parts[_this2._partName(part)] = _this2._partValue(part);
           });
         } else if (this._isPartDefinition(value)) {
           value.forEach(function (partDefinition) {
-            hash[_this2._partName(partDefinition)] = partDefinition;
+            _this2._parts[_this2._partName(partDefinition)] = partDefinition;
           });
         } else {
           hash[key] = value.map(function (v) {
@@ -95,6 +96,14 @@ var Model = (function () {
     }
 
     return hash;
+  };
+
+  Model.prototype.get = function get(key) {
+    return key in this._parts ? this._parts[key] : undefined;
+  };
+
+  Model.prototype.set = function set(key, value) {
+    this._parts[key] = value;
   };
 
   Model.prototype._isPart = function _isPart(val) {
