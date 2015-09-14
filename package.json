@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/fridge-cms/fridge_api.js",
   "dependencies": {
+    "is-plain-object": "^2.0.1",
     "isomorphic-fetch": "^2.1.0",
     "object-assign": "^3.0.0",
     "qs": "^4.0.0"
