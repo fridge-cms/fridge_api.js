@@ -126,7 +126,7 @@ var FridgeApi = (function () {
 
     if (json && (method == 'post' || method == 'put')) {
       requestOptions.headers['Content-Type'] = 'application/json';
-      requestOptions.body = JSON.stringify(data);
+      requestOptions.body = JSON.stringify(json);
     }
 
     if ('auth' in options) {
