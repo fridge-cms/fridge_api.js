@@ -63,19 +63,19 @@ var FridgeApi = (function () {
   };
 
   FridgeApi.prototype.post = function post(url) {
-    var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var json = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
     var done = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-    return this._request("post", url, data, options, done);
+    return this._request("post", url, json, options, done);
   };
 
   FridgeApi.prototype.put = function put(url) {
-    var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var json = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
     var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
     var done = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
-    return this._request("put", url, data, options, done);
+    return this._request("put", url, json, options, done);
   };
 
   FridgeApi.prototype['delete'] = function _delete(url) {
@@ -117,18 +117,19 @@ var FridgeApi = (function () {
     return this.options.api_endpoint + '/' + path + (q.length ? '?' + q : '');
   };
 
-  FridgeApi.prototype._request = function _request(method, path, data, options, done) {
+  FridgeApi.prototype._request = function _request(method, path, json, options, done) {
     var _this2 = this,
         _arguments = arguments;
 
     var auth = true;
-    var requestOptions = {
-      headers: { 'Content-Type': 'application/json' },
-      body: method == 'post' || method == 'put' ? JSON.stringify(data) : null,
-      method: method
-    };
+    var requestOptions = { headers: {}, method: method };
 
-    if ("auth" in options) {
+    if (json && (method == 'post' || method == 'put')) {
+      requestOptions.headers['Content-Type'] = 'application/json';
+      requestOptions.body = JSON.stringify(data);
+    }
+
+    if ('auth' in options) {
       auth = options.auth;
       delete options.auth;
     }
