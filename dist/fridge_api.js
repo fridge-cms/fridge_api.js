@@ -14,6 +14,10 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+var _isPlainObject = require('is-plain-object');
+
+var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+
 var _qs = require('qs');
 
 var _qs2 = _interopRequireDefault(_qs);
@@ -122,9 +126,10 @@ var FridgeApi = (function () {
         _arguments = arguments;
 
     var auth = true;
+    var body = _isPlainObject2['default'](data) ? JSON.stringify(data) : data;
     var requestOptions = {
       headers: { 'Content-Type': 'application/json' },
-      body: method == 'post' || method == 'put' ? JSON.stringify(data) : null,
+      body: method == 'post' || method == 'put' ? body : null,
       method: method
     };
 
