@@ -5,7 +5,7 @@
   "main": "index.js",
   "files": [
     "index.js",
-    "lib/"
+    "dist/"
   ],
   "scripts": {
     "lint": "eslint lib",
