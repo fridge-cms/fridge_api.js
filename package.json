@@ -3,9 +3,14 @@
   "version": "0.2.4",
   "description": "Fridge API client for node/browser.",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib/"
+  ],
   "scripts": {
     "lint": "eslint lib",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "mkdir -p dist && babel lib -d dist --stage=0 --loose",
     "build": "rm -rf dist/* && node_modules/.bin/babel lib -d dist --stage=0 --loose -w"
   },
   "repository": {
