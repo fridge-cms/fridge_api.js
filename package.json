@@ -30,7 +30,6 @@
   "homepage": "https://github.com/fridge-cms/fridge_api.js",
   "dependencies": {
     "isomorphic-fetch": "^2.1.0",
-    "object-assign": "^3.0.0",
     "qs": "^4.0.0"
   },
   "devDependencies": {
