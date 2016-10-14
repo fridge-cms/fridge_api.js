@@ -10,8 +10,11 @@
   "scripts": {
     "lint": "eslint lib",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "mkdir -p dist && babel lib -d dist --stage=0 --loose",
-    "build": "rm -rf dist/* && node_modules/.bin/babel lib -d dist --stage=0 --loose -w"
+    "prepublish": "npm run clean && npm run build:browser && npm run build:commonjs",
+    "clean": "rm -rf dist/* && mkdir -p dist",
+    "build:commonjs": "babel lib -d dist --stage=0 --loose",
+    "build:browser": "webpack index.js dist/fridge_api.min.js -p --output-library=FridgeApi --output-library-target=umd",
+    "start": "babel lib -d dist --stage=0 --loose -w"
   },
   "repository": {
     "type": "git",
@@ -35,7 +38,6 @@
   "devDependencies": {
     "babel": "^5.6.14",
     "babel-eslint": "^3.1.20",
-    "babelify": "^6.1.2",
-    "browserify": "^10.2.4"
+    "webpack": "^1.13.2"
   }
 }
