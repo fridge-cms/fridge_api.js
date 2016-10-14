@@ -10,3 +10,9 @@ client = FridgeApi.client({
   client_secret: "xxxxxxxxxxxx"
 })
 ```
+
+## Usage in browser
+
+```html
+<script src="https://unpkg.com/fridge_api@0.2.9/dist/fridge_api.min.js"></script>
+```
