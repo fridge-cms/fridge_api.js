@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint lib",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm run clean && npm run build:browser && npm run build:commonjs",
+    "prepublish": "npm run clean && npm run build:commonjs && npm run build:browser",
     "clean": "rm -rf dist/* && mkdir -p dist",
     "build:commonjs": "babel lib -d dist --stage=0 --loose",
     "build:browser": "webpack index.js dist/fridge_api.min.js -p --output-library=FridgeApi --output-library-target=umd",
