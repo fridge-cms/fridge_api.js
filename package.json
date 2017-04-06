@@ -13,7 +13,7 @@
     "prepublish": "npm run clean && npm run build:commonjs && npm run build:browser",
     "clean": "rm -rf dist/* && mkdir -p dist",
     "build:commonjs": "babel lib -d dist --stage=0 --loose",
-    "build:browser": "webpack index.js dist/fridge_api.min.js -p --output-library=FridgeApi --output-library-target=umd",
+    "build:browser": "webpack index.js dist/fridge.min.js -p --output-library=Fridge --output-library-target=umd",
     "start": "babel lib -d dist --stage=0 --loose -w"
   },
   "repository": {

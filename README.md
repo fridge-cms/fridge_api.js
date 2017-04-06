@@ -3,9 +3,9 @@
 Fridge API client for the browser and node.js
 
 ```js
-var FridgeApi = require('fridge_api');
+var Fridge = require('fridge');
 
-client = FridgeApi.client({
+client = Fridge.client({
   client_id: "sk_xxxxxxxxxxx",
   client_secret: "xxxxxxxxxxxx"
 })
@@ -14,5 +14,5 @@ client = FridgeApi.client({
 ## Usage in browser
 
 ```html
-<script src="https://unpkg.com/fridge_api@0.2.9/dist/fridge_api.min.js"></script>
+<script src="https://unpkg.com/fridge@1.0.0/dist/fridge.min.js"></script>
 ```

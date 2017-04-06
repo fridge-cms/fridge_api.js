@@ -1,3 +1,3 @@
-var FridgeApi = require('./dist/fridge_api')
+var Fridge = require('./dist/fridge')
 
-module.exports = FridgeApi
+module.exports = Fridge
