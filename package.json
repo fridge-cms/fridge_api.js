@@ -2,9 +2,8 @@
   "name": "fridge",
   "version": "2.0.0-beta",
   "description": "Fridge API client for node/browser.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "index.js",
     "dist/"
   ],
   "scripts": {
@@ -13,7 +12,7 @@
     "prepublish": "npm run clean && npm run build:commonjs && npm run build:browser",
     "clean": "rm -rf dist/* && mkdir -p dist",
     "build:commonjs": "babel lib -d dist",
-    "build:browser": "webpack index.js dist/fridge.min.js -p --output-library=Fridge --output-library-target=umd",
+    "build:browser": "webpack dist/index.js dist/fridge.min.js -p --config webpack.config.js",
     "start": "babel lib -d dist -w"
   },
   "repository": {
@@ -38,7 +37,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
-    "webpack": "^1.13.2"
+    "webpack": "^3.10.0"
   }
 }
