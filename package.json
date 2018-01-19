@@ -12,9 +12,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run clean && npm run build:commonjs && npm run build:browser",
     "clean": "rm -rf dist/* && mkdir -p dist",
-    "build:commonjs": "babel lib -d dist --stage=0 --loose",
+    "build:commonjs": "babel lib -d dist",
     "build:browser": "webpack index.js dist/fridge.min.js -p --output-library=Fridge --output-library-target=umd",
-    "start": "babel lib -d dist --stage=0 --loose -w"
+    "start": "babel lib -d dist -w"
   },
   "repository": {
     "type": "git",
@@ -36,8 +36,9 @@
     "qs": "^4.0.0"
   },
   "devDependencies": {
-    "babel": "^5.6.14",
-    "babel-eslint": "^3.1.20",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "webpack": "^1.13.2"
   }
 }

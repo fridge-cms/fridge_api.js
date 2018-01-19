@@ -1,3 +1,3 @@
-var Fridge = require('./dist/fridge')
+var Fridge = require('./dist')
 
 module.exports = Fridge
