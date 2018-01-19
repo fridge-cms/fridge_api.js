@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://fridgecms.com/static/Fridge-dark.svg" width="32" />
   <h1>Fridge API Client</h1>
-  Official JavaScript client for interacting with the [Fridge API](https://fridgecms.com/docs/api).
+  Official JavaScript client for interacting with the <a href="https://fridgecms.com/docs/api" target="_blank">Fridge API</a>.
 </div>
 
 ## Usage
