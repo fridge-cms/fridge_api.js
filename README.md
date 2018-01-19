@@ -1,12 +1,10 @@
 <div align="center">
-  <img src="https://fridgecms.com/Fridge-dark.svg" width="32" />
+  <img src="https://fridgecms.com/static/Fridge-dark.svg" width="32" />
   <h1>Fridge API Client</h1>
   Official JavaScript client for interacting with the [Fridge API](https://fridgecms.com/docs/api).
 </div>
 
 ## Usage
-
-### Add Fridge to your project
 
 Add `fridge` to your `package.json`.
 
@@ -16,8 +14,7 @@ $ npm install fridge@beta
 
 [Still using the `v1` API?](#v1-api)
 
-
-### Init client with your API token
+Init the client with your API token.
 
 ```js
 import Fridge from 'fridge'
