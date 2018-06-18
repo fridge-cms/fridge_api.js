@@ -38,4 +38,4 @@ If you are still running on the v1 Fridge API
 $ npm install fridge@1.0.1
 ```
 
-Please refer to the [`v1.0.1` README](https://github.com/fridge-cms/fridge_api.js/blob/v1.0.1/README.md<Paste>) for details.
+Please refer to the [`v1.0.1` README](https://github.com/fridge-cms/fridge_api.js/blob/v1.0.1/README.md) for details.
