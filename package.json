@@ -1,6 +1,6 @@
 {
   "name": "fridge",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Fridge API client for node/browser.",
   "main": "dist/index.js",
   "module": "lib/index.ts",
