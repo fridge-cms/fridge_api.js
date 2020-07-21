@@ -9,7 +9,7 @@ const defaults = {
 };
 
 type FridgeOptions = {
-  apiUrl: string;
+  apiUrl?: string;
   fridgeId?: string;
   token?: string;
 };
