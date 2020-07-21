@@ -1,19 +1,20 @@
 {
   "name": "fridge",
-  "version": "2.1.1-beta",
+  "version": "3.0.0",
   "description": "Fridge API client for node/browser.",
   "main": "dist/index.js",
+  "module": "lib/index.ts",
   "files": [
-    "dist/"
+    "dist/",
+    "lib/"
   ],
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "lint": "eslint lib",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run clean && npm run build:commonjs && npm run build:browser",
     "clean": "rm -rf dist/* && mkdir -p dist",
-    "build:commonjs": "babel lib -d dist",
-    "build:browser": "webpack dist/index.js dist/fridge.min.js -p --config webpack.config.js",
-    "start": "babel lib -d dist -w"
+    "build:commonjs": "tsc --project tsconfig.json",
+    "build:browser": "webpack dist/index.js -o dist/fridge.min.js -p --config webpack.config.js",
+    "start": "tsc --project tsconfig.json --watch"
   },
   "repository": {
     "type": "git",
@@ -31,15 +32,14 @@
   },
   "homepage": "https://github.com/fridge-cms/fridge_api.js",
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "isomorphic-fetch": "^2.1.0",
-    "qs": "^4.0.0"
+    "isomorphic-fetch": "^2.2.1",
+    "qs": "^6.9.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "webpack": "^3.10.0"
+    "@types/node": "^14.0.24",
+    "@types/qs": "^6.9.3",
+    "typescript": "^3.9.7",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }
