@@ -9,7 +9,7 @@
 Add `fridge` to your `package.json`.
 
 ```
-$ npm install fridge@beta
+$ npm install fridge
 ```
 
 [Still using the `v1` API?](#v1-api)
@@ -17,9 +17,9 @@ $ npm install fridge@beta
 Init the client with your API token.
 
 ```js
-import Fridge from 'fridge'
+import Fridge from "fridge";
 
-const fridge = Fridge.client({token: 'xxxxxxxxxxxx'})
+const fridge = Fridge.client({ token: "xxxxxxxxxxxx" });
 ```
 
 Refer to the [Fridge API Documentation](https://fridgecms.com/docs/api) for a complete API reference and usage examples.
