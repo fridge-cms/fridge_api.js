@@ -14,6 +14,16 @@ type FridgeOptions = {
   token?: string;
 };
 
+type FridgeGetRequestOptions = Record<string, string | string[] | undefined> & {
+  body?: BodyInit | null;
+  credentials?: RequestCredentials;
+  headers?: HeadersInit;
+};
+
+type FridgeUpdateRequestOptions = FridgeGetRequestOptions & {
+  body?: BodyInit | null;
+};
+
 export default class Fridge {
   options: FridgeOptions;
   constructor(options?: FridgeOptions) {
@@ -24,23 +34,36 @@ export default class Fridge {
     return new Fridge(options);
   }
 
-  get(url: string, options = {}) {
-    return this._request("get", url, null, options);
+  get<T>(url: string, options: FridgeGetRequestOptions = {}) {
+    return this._request<T>("get", url, null, options);
   }
 
-  post(url: string, json = {}, options = {}) {
-    return this._request("post", url, json, options);
+  post<T>(
+    url: string,
+    json: any = {},
+    options: FridgeUpdateRequestOptions = {}
+  ) {
+    return this._request<T>("post", url, json, options);
   }
 
-  put(url: string, json = {}, options = {}) {
-    return this._request("put", url, json, options);
+  put<T>(
+    url: string,
+    json: any = {},
+    options: FridgeUpdateRequestOptions = {}
+  ) {
+    return this._request<T>("put", url, json, options);
   }
 
-  delete(url: string, options = {}) {
+  delete(url: string, options: FridgeGetRequestOptions = {}) {
     return this._request("delete", url, null, options);
   }
 
-  async _request(method: string, path: string, json: any, options: any) {
+  async _request<T>(
+    method: string,
+    path: string,
+    json: any,
+    options: FridgeGetRequestOptions | FridgeUpdateRequestOptions
+  ): Promise<T> {
     const requestOptions: any = { headers: {}, method };
 
     if (this.options.token) {
